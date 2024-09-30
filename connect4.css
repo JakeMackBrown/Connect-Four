@@ -30,6 +30,14 @@ body {
     border: 6px solid rgb(20, 18, 18)
 }
 
+.blue-piece {
+    background-color: rgba(6, 6, 199, 0.571)
+}
+
+.red-piece {
+    background-color: rgb(131, 0, 0)
+}
+
 button {
     margin-bottom: 20px;
     height: 30px;

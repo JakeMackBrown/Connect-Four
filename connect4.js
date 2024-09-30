@@ -2,9 +2,9 @@
 
 let playerOne = "B";
 let playerTwo = "R";
-const currentPlayer = playerOne;
+let currentPlayer = playerOne;
 
-let gameActive = true;
+let gameOver = false;
 let board;
 
 const rows = 6;
@@ -28,11 +28,33 @@ function startGame () {
             let tile = document.createElement('div');
             tile.id = r.toString() + "-" + c.toString();
             tile.classList.add("tile");
+            tile.addEventListener("click", setPiece);
             document.getElementById('board').append(tile);
         }
         board.push(row);
     }
 } 
+
+function setPiece () {
+    if (gameOver) {
+        return;
+    }
+
+    let coords = this.id.split("-"); 
+    let r = parseInt(coords[0]);
+    let c = parseInt(coords[1]);
+
+    board[r][c] = currentPlayer;
+    let tile = this;
+    if (currentPlayer == playerOne) {
+        tile.classList.add('blue-piece');
+        currentPlayer = playerTwo;
+    }
+    else {
+        tile.classList.add("red-piece");
+        currentPlayer = playerOne
+    }
+}
 
 // function startGame() {
 //     gameActive = true;
