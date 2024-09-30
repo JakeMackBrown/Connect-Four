@@ -1,3 +1,16 @@
 body {
-    
+    font-family: Arial black, Helvetica, sans-serif;
+    text-align: center
+}
+
+#board {
+    height: 540px;
+    width: 630px;
+
+    background-color: black;
+    border: 10px solid darkslategray;
+
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap
 }
