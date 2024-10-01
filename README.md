@@ -5,11 +5,11 @@ A classic strategy game in which two players go head-to-head in a battle to own 
 ## Objective
 
 We will be making this with HTML, CSS and JavaScript.  Specifically:
+* arrays
 * for loops
 * addEventListener
-* document.createElement
-* document.querySelector
-arrow functions
+* document.GetElement
+* arrow functions (sliding window function)
 
 ## Rules and Directions
 * Two-player game.  Player 1 goes first.
