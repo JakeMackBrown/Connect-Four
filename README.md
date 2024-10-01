@@ -2,8 +2,6 @@
 
 A classic strategy game in which two players go head-to-head in a battle to own the grid.  They drop the discs into the grid, starting in the middle or at the edge to stack their colored discs upwards, horizontally, or diagonally. Use strategy to block opponents while aiming to be the first player to get four in a row to win.
 
-Connect Four (also known as Four Up, Plot Four, Find Four, Four in a Row, Four in a Line, or Drop Four), in this case, will be a a two-player game in which the players first choose a color and then take turns dropping one colored disc into a seven-column, six-row vertically suspended grid.  The pieces fall to the lowest available space within the column.
-
 ## Objective
 
 We will be making this with HTML, CSS and JavaScript.  Specifically:

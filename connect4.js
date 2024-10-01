@@ -63,6 +63,8 @@ function setPiece () {
     }
     r -= 1;
     currentColumns[c] = r;
+
+    
 }
 
 // function startGame() {

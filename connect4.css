@@ -52,3 +52,19 @@ button:hover {
     transition: 0.25s;
     background-color: rgb(151, 34, 34)
 }
+
+/* @media(max-width:700px){
+    #board{
+        width: 500px;
+    }
+}
+@media(max-width:520px){
+    #board{
+        width: 400px;
+    }    
+}
+@media(max-width:420px){
+    #board{
+        width: 320px;
+    } 
+} */
