@@ -64,7 +64,31 @@ function setPiece () {
     r -= 1;
     currentColumns[c] = r;
 
-    
+    confirmWin();
+}
+
+function confirmWin() {
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < columns - 3; c++) {
+            if (board[r][c] != ' ') {
+                if (board[r][c] == board [r][c+1] && board[r][c+1] == board[r][c+2] && board[r][c+2] == board[r][c+3]) {
+                nameWinner(r, c); 
+                return;   
+                }
+            }
+        }
+    }
+}
+
+function nameWinner(r, c) {
+    let winner = document.getElementById("winner");
+    if (board[r][c] == playerOne) {
+        winner.innerText = "Player 1 wins!"
+    } else {
+        winner.innerText = "Player 2 wins!";
+    }
+
+    gameOver = true;
 }
 
 // function startGame() {
