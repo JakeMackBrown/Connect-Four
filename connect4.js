@@ -1,5 +1,3 @@
-//const statusDisplay = document.querySelector('.game--status');
-
 let playerOne = "B";
 let playerTwo = "R";
 let currentPlayer = playerOne;
@@ -10,8 +8,6 @@ let currentColumns;
 
 let rows = 6;
 let columns = 7;
-
-//document.querySelector('.game--restart').addEventListener('click', startGame);
 
 window.onload = function () {
     startGame()
@@ -100,6 +96,17 @@ function confirmWin() {
             }
         }
     }
+
+    for (let r = 3; r < rows; r++) {
+        for (let c = 0; c < columns - 3; c++) {
+            if (board[r][c] != ' ') {
+                if (board[r][c] == board[r-1][c+1] && board[r-1][c+1] == board[r-2][c+2] && board[r-2][c+2] == board[r-3][c+3]) {
+                    nameWinner(r, c);
+                    return;
+                }
+            }
+        }
+    }
 }
 
 function nameWinner(r, c) {
@@ -112,12 +119,3 @@ function nameWinner(r, c) {
 
     gameOver = true;
 }
-
-// function startGame() {
-//     gameActive = true;
-//     currentPlayer = "B";
-//     gameState = ["", "", "", "", "", "", "", "", ""];
-//     statusDisplay.innerHTML = currentPlayerTurn();
-//     document.querySelectorAll('.cell')
-//                 .forEach(cell => cell.innerHTML = "")
-// }
