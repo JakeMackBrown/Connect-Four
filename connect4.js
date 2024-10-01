@@ -6,9 +6,10 @@ let currentPlayer = playerOne;
 
 let gameOver = false;
 let board;
+let currentColumns;
 
-const rows = 6;
-const columns = 7;
+let rows = 6;
+let columns = 7;
 
 //document.querySelector('.game--restart').addEventListener('click', startGame);
 
@@ -18,6 +19,7 @@ window.onload = function () {
 
 function startGame () {
     board = [];
+    currentColumns = [5, 5, 5, 5, 5, 5, 5];
 
     for (let r = 0; r < rows; r++) {
         let row = [];
@@ -44,8 +46,13 @@ function setPiece () {
     let r = parseInt(coords[0]);
     let c = parseInt(coords[1]);
 
+    r = currentColumns[c];
+    if (r < 0) {
+        return;
+    }
+
     board[r][c] = currentPlayer;
-    let tile = this;
+    let tile = document.getElementById(r.toString() + "-" + c.toString());
     if (currentPlayer == playerOne) {
         tile.classList.add('blue-piece');
         currentPlayer = playerTwo;
@@ -54,6 +61,8 @@ function setPiece () {
         tile.classList.add("red-piece");
         currentPlayer = playerOne
     }
+    r -= 1;
+    currentColumns[c] = r;
 }
 
 // function startGame() {
