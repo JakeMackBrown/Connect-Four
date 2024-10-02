@@ -24,13 +24,13 @@ function resetGame() {
     document.getElementById("winner").innerText = "";
     startGame();
 }
-// This sets the gameOver boolean flag to false, clears the winner text and resets currentPlayer to playerOne
+// ^^This sets the gameOver boolean flag to false, clears the winner text and resets currentPlayer to playerOne.
 
 function startGame () {
     board = [];
     currentColumns = [5, 5, 5, 5, 5, 5, 5]; //<<< refers to each column's current available row on the bottom of the board 
 
-    document.getElementById("board").innerHTML = ' '; //<< resets the board's HTML
+    document.getElementById("board").innerHTML = ' '; //<< resets the board's HTML at the start of a new game
 
     for (let r = 0; r < rows; r++) {
         let row = [];
@@ -43,9 +43,9 @@ function startGame () {
             tile.addEventListener("click", setPiece); //<< calls the setPiece function when any tile in the appended array is clicked.
             document.getElementById('board').append(tile);
         }
-        board.push(row); //<< this adds the tiles to the board, applying the above for loop of push, serving the same purpose as 42 separate divs.
+        board.push(row); //<< this adds the tiles to the board, applying the above for loop of push, serving the same purpose as 42 separate divs.  When the tile is clicked, its array is appended, corresponding with the setPiece function defined below.
 //This was the most important function of this script that I learned through this process.  I first started modeling this after our tic-tac-toe game, similar to how it's done in this walkthrough by Ania Kubow which I used for reference (https://www.youtube.com/watch?v=aroYjgQH8Tw).  After trying it this way, I wanted to circumvent the need to create 42 separate elements for each tile (i.e. "<div id = 0-0 class="tile"></div><div id = 0-1 class="tile"</div> etc.) because I didn't want to have to copy and paste every possible winning combination, and I thought it would be too many lines and detract from the code's readability.
-// The for loops above create a div for each tile and gives it the ID "r-c"
+// The for loops above create a div for each tile and give it the ID "r-c"
     }
 } 
 
@@ -65,7 +65,7 @@ function setPiece () {
 
     board[r][c] = currentPlayer;
     let tile = document.getElementById(r.toString() + "-" + c.toString());
-
+    //^^ this updates the board, setting board[r][c] to the current player ("B" or "R")
     if (currentPlayer == playerOne) {
         tile.classList.add('blue-piece');
         currentPlayer = playerTwo;
@@ -73,54 +73,64 @@ function setPiece () {
     else {
         tile.classList.add("red-piece");
         currentPlayer = playerOne
-    }
+    } //^^ these take the corresponding tile element from the DOM and add the class of "blue-piece" or "red-piece," which change the tile's color, and then alternates the current player.
     r -= 1;
-    currentColumns[c] = r;
+    currentColumns[c] = r; //When a piece is placed, this moves the available row index for that column one tile up by subtracting one from the value.
 
     confirmWin();
 }
 
+// For the function below, which serves the bulk of the game's logic, I initially used functions that reflected tic-tac-toe using the manual array of 42 tiles and manual array of winning combinations, similar to Ania Kubow.  When I tried that, I found I was having issues arise too easily with combination mishaps and when I tried to alter other things like CSS.  When I hit a wall, I referred to Kenny Yip's walkthrough (https://www.youtube.com/watch?v=4ARsthVnCTg&list=LL&index=2), which demonstrated sliding window functions.  The sliding window allowed for checking four consecutive pieces of the same player simultaneously while sliding in the opposite direction, covering the length of the array horizontally, vertically, and diagonally in both directions.  I restructured this to fit my established code and to be more legible.  This seemed like a much more efficient process than checking for every possible winning combination each move (that worked better with tic-tac-toe considering there were only nine tiles and far fewer winning combinations).  Once I tried the sliding window functions, I was having far fewer issues, but I noticed that in Kenny's walkthrough, his diagonal functions were missing conditions with winning combinations toward the top and middle of the board, so I fixed that with my functions below.
+
 function confirmWin() {
-    for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < columns - 3; c++) {
-            if (board[r][c] != ' ') {
-                if (board[r][c] == board[r][c+1] && board[r][c+1] == board[r][c+2] && board[r][c+2] == board[r][c+3]) {
-                    nameWinner(r, c); 
-                    return;   
-                }
+    // Check horizontal wins
+    for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < columns - 3; col++) { //this stops at columns-3 to account for seven columns, ensuring enough room for four consecutive pieces.
+            if (board[row][col] !== ' ' && //checks if the current tile is empty
+                board[row][col] === board[row][col + 1] &&
+                board[row][col] === board[row][col + 2] &&
+                board[row][col] === board[row][col + 3]) {
+                nameWinner(row, col);
+                return;
             }
         }
     }
 
-    for (let c = 0; c < columns; c++) {
-        for (let r = 0; r < rows - 3; r++) {
-            if (board[r][c] != ' ') {
-                if (board[r][c] == board[r+1][c] && board[r+1][c] == board[r+2][c] && board[r+2][c] == board[r+3][c]) {
-                    nameWinner(r, c);
-                    return;
-                }
+    // Check vertical wins
+    for (let col = 0; col < columns; col++) {
+        for (let row = 0; row < rows - 3; row++) {
+            if (board[row][col] !== ' ' && 
+                board[row][col] === board[row + 1][col] && //these conditions check if the current tile is the same as the three tiles below it in the same column.
+                board[row][col] === board[row + 2][col] &&
+                board[row][col] === board[row + 3][col]) {
+                nameWinner(row, col);
+                return;
             }
         }
     }
 
-    for (let r = 0; r < rows - 3; r++) {
-        for (let c = 0; c < columns - 3; c++) {
-            if (board[r][c] != ' ') {
-                if (board[r][c] == board[r+1][c+1] && board[r+1][c+1] == board[r+2][c+2] && board[r+3][c+3]) {
-                    nameWinner(r, c);
-                    return;
-                }
+    // Check diagonal (bottom-left to top-right) wins
+    for (let row = 0; row < rows - 3; row++) {
+        for (let col = 0; col < columns - 3; col++) {
+            if (board[row][col] !== ' ' && 
+                board[row][col] === board[row + 1][col + 1] &&
+                board[row][col] === board[row + 2][col + 2] &&
+                board[row][col] === board[row + 3][col + 3]) {
+                nameWinner(row, col);
+                return;
             }
         }
     }
 
-    for (let r = 3; r < rows; r++) {
-        for (let c = 0; c < columns - 3; c++) {
-            if (board[r][c] != ' ') {
-                if (board[r][c] == board[r-1][c+1] && board[r-1][c+1] == board[r-2][c+2] && board[r-2][c+2] == board[r-3][c+3]) {
-                    nameWinner(r, c);
-                    return;
-                }
+    // Check diagonal (top-left to bottom-right) wins
+    for (let row = 3; row < rows; row++) {
+        for (let col = 0; col < columns - 3; col++) {
+            if (board[row][col] !== ' ' && 
+                board[row][col] === board[row - 1][col + 1] &&
+                board[row][col] === board[row - 2][col + 2] &&
+                board[row][col] === board[row - 3][col + 3]) {
+                nameWinner(row, col);
+                return;
             }
         }
     }

@@ -12,7 +12,7 @@ body {
     padding: 1rem;
 }
 
-/* I utilized ChatGPT to help smooth out issues I had with the board and tiles becoming mishapen whenever I adjusted to other screen sizes.  It also made me conscious of the usefulness of the gap, aspect-ratio and border-box values in making this more playable on smaller screens. */
+/* I utilized ChatGPT to help smooth out issues I had with the board and tiles becoming mishapen whenever I adjusted to other screen sizes, even though I only meant to adjust to mid-sized screens like tablets.  It also made me conscious of the usefulness of the gap, aspect-ratio and border-box values in making this more playable on smaller screens. */
 
 #board {
     display: grid;
@@ -29,10 +29,10 @@ body {
 }
 
 .tile {
-    background-color: white;
+    background-color: whitesmoke;
     aspect-ratio: 1; /* keeps tiles as perfect squares which border-radius makes into circles */
     border-radius: 50%;
-    border: 6px solid rgb(20, 18, 18);
+    border: 6px solid rgb(24, 24, 24);
     width: 100%; 
     height: 100%;
     box-sizing: border-box
@@ -64,7 +64,7 @@ button:hover {
 @media (max-width: 768px) {
     #board {
         width: 90vw;
-        gap: 8px; /* Reduce gap on smaller screens */
+        gap: 8px; /* Reduces gap on smaller screens */
     }
 
     button {
