@@ -17,6 +17,13 @@ window.onload = function () {
     });
 };
 
+function resetGame() {
+    gameOver = false;
+    currentPlayer = playerOne;
+    document.getElementById("winner").innerText = "";
+    startGame();
+}
+
 function startGame () {
     board = [];
     currentColumns = [5, 5, 5, 5, 5, 5, 5];
@@ -37,13 +44,6 @@ function startGame () {
         board.push(row);
     }
 } 
-
-// function resetGame() {
-//     startGame();
-
-//     document.getElementById("winner").style.display = 'none';
-//     gameOver = false;
-// }
 
 function setPiece () {
     if (gameOver) {
