@@ -1,11 +1,11 @@
 * {
-    background-color:rgb(26, 43, 27);
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
 
 body {
+    background-color:rgb(26, 43, 27);
     text-align: center;
     font-family: Arial black, Helvetica, sans-serif;
     color: whitesmoke;
@@ -39,7 +39,7 @@ body {
 }
 
 .blue-piece {
-    background-color: rgba(6, 6, 199, 0.571)
+    background-color: #0606c792
 }
 
 .red-piece {

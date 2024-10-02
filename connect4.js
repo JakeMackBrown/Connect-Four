@@ -22,6 +22,7 @@ function resetGame() {
     gameOver = false;
     currentPlayer = playerOne;
     document.getElementById("winner").innerText = "";
+    document.body.style.backgroundColor = ""; //changes background color to default when game is reset
     startGame();
 }
 // ^^This sets the gameOver boolean flag to false, clears the winner text and resets currentPlayer to playerOne.
@@ -138,10 +139,13 @@ function confirmWin() {
 
 function nameWinner(r, c) {
     let winner = document.getElementById("winner");
+    let body = document.body;
     if (board[r][c] == playerOne) {
-        winner.innerText = "Player 1 wins!"
+        winner.innerText = "Player 1 wins!";
+        body.style.backgroundColor = "darkblue"; //changes background color to blue when playerOne wins
     } else {
         winner.innerText = "Player 2 wins!";
+        body.style.backgroundColor = "darkred" //changes background color to red when playerTwo wins
     }
 
     gameOver = true;
