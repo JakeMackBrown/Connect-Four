@@ -139,13 +139,12 @@ function confirmWin() {
 
 function nameWinner(r, c) {
     let winner = document.getElementById("winner");
-    let body = document.body;
     if (board[r][c] == playerOne) {
         winner.innerText = "Player 1 wins!";
-        body.style.backgroundColor = "darkblue"; //changes background color to blue when playerOne wins
+        document.body.style.backgroundColor = "darkblue"; //changes background color to blue when playerOne wins
     } else {
         winner.innerText = "Player 2 wins!";
-        body.style.backgroundColor = "darkred" //changes background color to red when playerTwo wins
+        document.body.style.backgroundColor = "darkred" //changes background color to red when playerTwo wins
     }
 
     gameOver = true;
